@@ -74,7 +74,9 @@ public function store(AddUserRequest $request)
     public function edit(User $user)
     {
 
-        return view('users.edit',compact('user'));
+     $roles = Role::all();
+
+        return view('users.edit',compact('user','roles'));
 
     }
 
@@ -129,6 +131,17 @@ public function store(AddUserRequest $request)
      */
     public function destroy(User $user)
     {
+    
+        if ($user->hasRole('admin')) {
+        return redirect()->route('users.index')
+            ->with('error', 'لا يمكن حذف المدير');
+    }
+
+    if ($user->id === auth()->id()) {
+        return redirect()->route('users.index')
+            ->with('error', 'لا يمكنك حذف حسابك أنت');
+    }
+
         $user->delete();
 
         return back();

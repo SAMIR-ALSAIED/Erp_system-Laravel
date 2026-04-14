@@ -119,6 +119,10 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
 
+        if ($role->name === 'admin') {
+        return redirect()->route('roles.index')
+            ->with('error', 'لا يمكن حذف صلاحية المدير');
+    }
         $role->delete();
 
         return back();

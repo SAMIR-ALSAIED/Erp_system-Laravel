@@ -94,6 +94,10 @@
 
 								<td class="text-center">
 
+
+
+@if(!$user->hasRole('admin'))
+
 <a href="{{route('users.edit',$user->id)}}" class="btn btn-sm btn-info ms-1">   <i class="bx bx-edit-alt fs-5"></i></a>
     <form action="{{route('users.destroy',$user->id)}}" method="POST" style="display:inline;">
         @csrf
@@ -103,7 +107,7 @@
         </button>
     </form>
 </td>
-
+@endif
 
 
 										</tr>

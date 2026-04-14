@@ -61,6 +61,7 @@
                                     <td>{{ $role->name }}</td>
                                     <td>
 
+@if($role->name !== 'admin')
 
                                         @can('تعديل صلاحية')
                                             <a class="btn  btn-info btn-sm ms-1"
@@ -78,7 +79,7 @@
         </button>
     </form>
 
-
+@endif
 
                                     </td>
                                 </tr>
